@@ -9,6 +9,7 @@ class Home extends React.Component {
 
     this.state = {
       recipes: [],
+      favorites: [],
       currentRecipe: null,
     }
 
@@ -25,7 +26,7 @@ class Home extends React.Component {
     })
   }
 
-  onRecipeClick(id) {
+  onRecipeClick = id => {
     fetch(`${API_URL}/v1/recipes/${id}`)
       .then(res => res.json())
       .then((recipe) => {
@@ -35,15 +36,30 @@ class Home extends React.Component {
     })
   }
 
+  toggleFavorite = id => {
+    this.setState(({ favorites, ...state }) => {
+      const index  = favorites.indexOf(id)
+      if(index !== -1) {
+        return { ...state, favorites: favorites.filter(f => {
+            return f !== id
+          }
+        )}
+      }
+      return { ...state, favorites: [...favorites, id] }
+    })
+  }
+
   render () {
-    const { recipes, currentRecipe } = this.state
+    const { recipes, favorites, currentRecipe } = this.state
     return (
       <div>
         <main style={{ display: 'flex' }}>
           <RecipeList
             style={{ flex: '0 0 30%' }}
             recipes={recipes}
+            favorites={favorites}
             onClick={this.onRecipeClick}
+            onFavorited={this.toggleFavorite}
           />
           <RecipeDetail
             style={{ flex: '0 0 70%' }}
