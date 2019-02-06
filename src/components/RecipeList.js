@@ -1,7 +1,7 @@
 import React from 'react'
 import RecipeListItem from './RecipeListItem'
 
-const RecipeList = ({ style, favorites, recipes, ...props }) => (
+const RecipeList = ({ style, favorites=[], recipes=[], ...props }) => (
 
     <ul>
         {recipes.map(recipe => {
