@@ -4,26 +4,15 @@ import RecipeList from './RecipeList'
 import RecipeDetail from './RecipeDetail'
 
 class Home extends React.Component {
-    constructor(props) {
-    super(props);
 
-    this.state = {
-      recipes: [],
-      favorites: [],
-      currentRecipe: null,
-    }
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        currentRecipe: null,
+      }
 
     this.onRecipeClick = this.onRecipeClick.bind(this);
-  }
-
-  componentDidMount() {
-    fetch(`${API_URL}/v1/recipes`)
-      .then(res => res.json())
-      .then((recipes) => {
-        this.setState({
-          recipes: recipes
-        })
-    })
   }
 
   onRecipeClick = id => {
@@ -36,31 +25,24 @@ class Home extends React.Component {
     })
   }
 
-  toggleFavorite = id => {
-    this.setState(({ favorites, ...state }) => {
-      const index  = favorites.indexOf(id)
-      if(index !== -1) {
-        return { ...state, favorites: favorites.filter(f => {
-            return f !== id
-          }
-        )}
-      }
-      return { ...state, favorites: [...favorites, id] }
-    })
-  }
-
   render () {
-    const { recipes, favorites, currentRecipe } = this.state
+
+    const { currentRecipe } = this.state
+    const { recipes, favorites } = this.props.state
+    
     return (
       <div>
         <main style={{ display: 'flex' }}>
+        <div>
+          <h2>Recipes</h2>
           <RecipeList
             style={{ flex: '0 0 30%' }}
             recipes={recipes}
             favorites={favorites}
             onClick={this.onRecipeClick}
-            onFavorited={this.toggleFavorite}
+            onFavorited={this.props.toggleFavorite}
           />
+        </div>
           <RecipeDetail
             style={{ flex: '0 0 70%' }}
             recipe={currentRecipe}

@@ -1,7 +1,6 @@
 import React from 'react'
 
 const RecipeListItem = ({ recipe, onClick, onFavorited, favorited }) => {
-    console.log('recipe')
     return (
     <li 
         onClick={() => onClick(recipe.id)}

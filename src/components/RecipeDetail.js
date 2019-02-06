@@ -1,5 +1,5 @@
 import React from 'react'
-import classNames from 'classnames'
+import { Link } from 'react-router-dom'
 
 const RecipeDetail = (props) => {
 
@@ -37,6 +37,7 @@ const RecipeDetail = (props) => {
                     )
                 })}
             </ol>
+            <Link to={`/recipe/${props.recipe.id}`}>See More</Link>
         </div>
     )
 }
