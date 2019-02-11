@@ -5,6 +5,11 @@ import Home from './Home'
 import Favorites from './Favorites'
 import Recipe from './Recipe'
 import NotFound from './NotFound'
+import styled from 'styled-components'
+
+const Main = styled.main`
+    padding: 0 5%;
+`
 
 class App extends React.Component {
 
@@ -43,7 +48,7 @@ class App extends React.Component {
     render () {
         return (
             <BrowserRouter>
-                <main>
+                <Main>
                     <Header />
                     <Switch>
                         <Redirect from="/home" to="/" />
@@ -65,7 +70,7 @@ class App extends React.Component {
                         />
                         <Route component={NotFound} />
                     </Switch>
-                </main>
+                </Main>
             </BrowserRouter>
         )
     }

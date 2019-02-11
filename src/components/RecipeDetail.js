@@ -1,23 +1,59 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Paragraph = styled.p`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`
+
+const SectionTitle = styled.h2`
+    font-size: 26px;
+`
+
+const DetailTitle = styled.h3`
+    margin: 10px 0;
+    font-size: 22px;
+`
+
+const StyledImg = styled.img`
+    width: 100%;
+`
+
+const Button = styled(Link)`
+    display: block;
+    max-width: 150px;
+    margin: 15px auto;
+    padding: 10px 15px;
+    color: #ffffff;
+    background-color: #009eb7;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+`
 
 const RecipeDetail = (props) => {
 
     if(!props.recipe) {
         return (
-            <p style= {props.style}>Select a recipe</p>
+            <Paragraph >Select a recipe</Paragraph>
         )
     }
 
     return (
-        <div style= {props.style}>
-            <h2>{props.recipe.name}</h2>
-            <img src={props.recipe.image} />
-            <div>
-                <span>{props.recipe.category}</span>
-                <span>{props.recipe.calories}</span>
-            </div>
-            <h3>Ingredients</h3>
+        <div>
+            <SectionTitle>{props.recipe.name}</SectionTitle>
+            <StyledImg src={props.recipe.image} />
+
+            <DetailTitle>Category</DetailTitle>
+            <p>{props.recipe.category}</p>
+
+            <DetailTitle>Calories</DetailTitle>
+            <p>{props.recipe.calories}</p>
+
+            <DetailTitle>Ingredients</DetailTitle>
             {props.recipe.ingredients && 
                 <ul>
                     {props.recipe.ingredients.map(ingredient => {
@@ -29,7 +65,7 @@ const RecipeDetail = (props) => {
                     })}
                 </ul>
             }
-            <h3>Steps</h3>
+            <DetailTitle>Steps</DetailTitle>
             {props.recipe.steps && 
                 <ol>
                     {props.recipe.steps.map(step => {
@@ -41,7 +77,10 @@ const RecipeDetail = (props) => {
                     })}
                 </ol>
             }
-            <Link to={`/recipe/${props.recipe.id}`}>See More</Link>
+            {
+                props.backButton ? <Button to="/">Back to Home</Button> : <Button to={`/recipe/${props.recipe.id}`}>See More</Button>
+            }
+            
         </div>
     )
 }

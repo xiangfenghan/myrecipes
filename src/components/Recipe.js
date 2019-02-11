@@ -1,5 +1,10 @@
 import React from 'react'
 import RecipeDetail from './RecipeDetail'
+import styled from 'styled-components'
+
+const RecipePage = styled.div`
+    font-family: 'Ubuntu', sans-serif;
+`
 
 class Recipe extends React.Component {
 
@@ -29,9 +34,9 @@ class Recipe extends React.Component {
 
         return (
 
-            <div>
-                <RecipeDetail recipe={recipe} />
-            </div>
+            <RecipePage>
+                <RecipeDetail recipe={recipe} backButton />
+            </RecipePage>
 
         )
 

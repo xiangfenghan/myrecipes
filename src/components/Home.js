@@ -1,7 +1,31 @@
 import React from 'react'
-import Header from './Header'
 import RecipeList from './RecipeList'
 import RecipeDetail from './RecipeDetail'
+import styled from 'styled-components'
+
+const Main = styled.main`
+    display: flex;
+`
+
+const SectionList = styled.div`
+    flex: 0 0 30%;
+    padding: 0 10px 0 0;
+`
+
+const SectionDetail = styled.div`
+    position: relative;
+    flex: 0 0 70%;
+    padding: 0 0 0 10px;
+    color: #666666;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+`
+
+const Subtitle = styled.h2`
+    color: #666666;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 26px;
+`
 
 class Home extends React.Component {
 
@@ -12,7 +36,7 @@ class Home extends React.Component {
         currentRecipe: null,
       }
 
-    this.onRecipeClick = this.onRecipeClick.bind(this);
+    this.onRecipeClick = this.onRecipeClick.bind(this)
   }
 
   onRecipeClick = id => {
@@ -31,26 +55,26 @@ class Home extends React.Component {
     const { recipes, favorites } = this.props.state
     
     return (
-      <div>
-        <main style={{ display: 'flex' }}>
         <div>
-          <h2>Recipes</h2>
-          <RecipeList
-            style={{ flex: '0 0 30%' }}
-            recipes={recipes}
-            favorites={favorites}
-            onClick={this.onRecipeClick}
-            onFavorited={this.props.toggleFavorite}
-          />
+            <Main>
+                <SectionList>
+                    <Subtitle>Recipes</Subtitle>
+                    <RecipeList
+                        recipes={recipes}
+                        favorites={favorites}
+                        onClick={this.onRecipeClick}
+                        onFavorited={this.props.toggleFavorite}
+                    />
+                </SectionList>
+                <SectionDetail>
+                    <RecipeDetail
+                        recipe={currentRecipe}
+                    />
+                </SectionDetail>
+            </Main>
         </div>
-          <RecipeDetail
-            style={{ flex: '0 0 70%' }}
-            recipe={currentRecipe}
-          />
-        </main>
-      </div>
-    )
-  }
+      )
+    }
 }
 
 export default Home
