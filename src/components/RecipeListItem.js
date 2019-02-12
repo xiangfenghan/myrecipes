@@ -35,9 +35,8 @@ const RecipeListItem = ({ recipe, onClick, onFavorited, favorited }) => {
             e.stopPropagation()
             onFavorited(recipe.id)}
         }
-        >{favorited ? <HeartFavorited>❤</HeartFavorited> : <Heart>❤</Heart>}</FavoritedIcon>
+        >{ favorited ? <HeartFavorited>❤</HeartFavorited> : <Heart>❤</Heart> }</FavoritedIcon>
         <span>{recipe.name}</span>
-        <span>{recipe.category}</span>
     </StyledList>
 )}
 
